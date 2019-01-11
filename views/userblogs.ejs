@@ -1,0 +1,72 @@
+<% include dashbaords/header.ejs %>
+  <div class="col-md-12" style="padding:20px;">
+    <div class="col-md-12 padding-0">
+      <div class="col-md-8 padding-0">
+        <div class="col-md-12">
+          <h4>
+            Welcome To Dashboard
+          </h4>
+          <% if(userRole==1) { %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <% if (typeof deleteSuccessMsg != 'undefined' && deleteSuccessMsg) { %>
+                  <div class="alert alert-success">
+                    <%=deleteSuccessMsg; %>
+                  </div>
+                  <% } %>
+                    <h4>
+                      User Listing
+                    </h4>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Blog Name</th>
+                    <th>added By</th>
+                    <th>Email Id</th>
+                    <th>Blog Image</th>
+                    <th>Action</th>
+                  </tr>
+                  <%  var i=1;
+                userBlogData.forEach(function(blogs){ %>
+                    <tr>
+                      <td>
+                        <%= i++; %>
+                      </td>
+                      <td>
+                        <%= blogs.blog_name; %>
+                      </td>
+                      <td>
+                        <%= blogs.blog_content; %>
+                      </td>
+                      <td>
+                        <%= blogs.email_id; %>
+                      </td>
+                      <td>
+                        <%  if(typeof blogs.blog_img != 'undefined' && blogs.blog_img) { %>
+                          <img src="/uploads/<%=blogs.blog_img; %>" class="img-circle" width="100" height="100" alt="Cinque Terre">
+                     
+                      <% } else {%>
+                        <img src="/img/avatar.jpg" class="img-circle" width="100" height="100" alt="Cinque Terre" />
+                        <% }%>
+                      </td>
+                          <td>
+                            <button class="btn btn-circle btn-mn btn-danger" value="primary">
+                              <a href="/usernlogs/<%= blogs.blog_id; %>">
+                                <span class="glyphicon glyphicon-trash"></span>
+                              </a>
+                            </button>
+                          </td>
+                    </tr>
+                    <% });%>
+                </thead>
+              </table>
+            </div>
+            <% } %>
+        </div>
+      </div>
+      <% include dashbaords/rightsidebar.ejs %>
+    </div>
+  </div>
+  <% include dashbaords/footer.ejs %>

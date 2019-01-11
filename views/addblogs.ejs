@@ -1,0 +1,50 @@
+<% include dashbaords/header.ejs %>
+    <div class="col-md-12" style="padding:20px;">
+        <div class="col-md-8 padding-0">
+            <div class="col-md-8 padding-0">
+                <div class="col-md-12">
+                    <div class="panel-heading">
+                        <% if (typeof finalMessages != 'undefined' && finalMessages) { %>
+                            <div class="alert alert-<%=ErrorState;%> fade in alert-dismissable">
+                                <%=finalMessages;%>
+                            </div>
+                            <% } else if(typeof ErrorMessages != 'undefined' && ErrorMessages) {%>
+                                <div class="alert alert-<%=ErrorState;%> fade in alert-dismissable">
+                                    <ul>
+                                        <% ErrorMessages.forEach(function(ErrorMsg){%>
+                                            <li>
+                                                <%=ErrorMsg.msg; %>
+                                            </li>
+                                            <% }); %>
+                                    </ul>
+                                </div>
+                                <% }%>
+                                    <h4>
+                                        Add Blog
+                                    </h4>
+                    </div>
+                    <form action="/addblogs/" method="post" encType="multipart/form-data">
+                        <div class="form-group">
+                            <img src="/img/avatar.jpg" class="img-circle" width="100" height="100" alt="Cinque Terre" />
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name">Blog's Name:</label>
+                            <input type="text" class="form-control" id="blog_name" name="blog_name" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Blog Contents:</label>
+                            <textarea class="form-control" name="blog_contents" rows="5" id="blog_contents"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input name="blogImg" class="btn fileupload-v1-btn" type="file">
+                        </div>
+                        <button type="submit" class="btn btn-default">Add blog</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <% include dashbaords/rightsidebar.ejs %>
+    </div>
+    </div>
+    <% include dashbaords/footer.ejs %>

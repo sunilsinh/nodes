@@ -1,0 +1,78 @@
+<% include dashbaords/header.ejs %>
+  <div class="col-md-12" style="padding:20px;">
+    <div class="col-md-12 padding-0">
+      <div class="col-md-8 padding-0">
+        <div class="col-md-12">
+          <h4>
+            Welcome To Dashboard
+          </h4>
+          <% if(userRole==1) { %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <% if (typeof deleteSuccessMsg != 'undefined' && deleteSuccessMsg) { %>
+                  <div class="alert alert-success">
+                    <%=deleteSuccessMsg; %>
+                  </div>
+                  <% } %>
+                    <h4>
+                      User Listing
+                    </h4>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email Id</th>
+                    <th>Profile Image</th>
+                    <th>Action</th>
+                  </tr>
+                  <%  var i=1;
+                allUserData.forEach(function(user){ %>
+                    <tr>
+                      <td>
+                        <%= i++; %>
+                      </td>
+                      <td>
+                        <%= user.first_name; %>
+                      </td>
+                      <td>
+                        <%= user.last_name; %>
+                      </td>
+                      <td>
+                        <%= user.email_id; %>
+                      </td>
+                      <td>
+                        <%  if(typeof user.user_img != 'undefined' && user.user_img) { %>
+                          <img src="/uploads/<%=user.user_img; %>" class="img-circle" width="100" height="100" alt="Cinque Terre">
+                     
+                      <% } else {%>
+                        <img src="/img/avatar.jpg" class="img-circle" width="100" height="100" alt="Cinque Terre" />
+                        <% }%>
+                      </td>
+
+                          <td>
+                            <button class="btn btn-circle btn-mn btn-info" value="primary">
+                              <a href="/userprofile/<%= user.user_id; %>">
+                                <span class="fa fa-paper-plane-o"></span>
+                              </a>
+                            </button>
+                            <button class="btn btn-circle btn-mn btn-danger" value="primary">
+                              <a href="/dashboard/<%= user.user_id; %>">
+                                <span class="glyphicon glyphicon-trash"></span>
+                              </a>
+                            </button>
+                          </td>
+                    </tr>
+                    <% });%>
+                </thead>
+              </table>
+            </div>
+            <% } %>
+        </div>
+      </div>
+      <% include dashbaords/rightsidebar.ejs %>
+    </div>
+  </div>
+  <% include dashbaords/footer.ejs %>
